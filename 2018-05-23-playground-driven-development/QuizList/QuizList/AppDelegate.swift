@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuizKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -9,8 +9,8 @@
 import UIKit
 import SnapKit
 
-class QuizViewController: UIViewController {
-  override func viewDidLoad() {
+public class QuizViewController: UIViewController {
+  override public func viewDidLoad() {
     super.viewDidLoad()
 
     let label = UILabel()
