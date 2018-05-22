@@ -9,9 +9,10 @@
 import UIKit
 import SnapKit
 
-class QuizViewController: UIViewController {
-  override func viewDidLoad() {
+public class QuizViewController: UIViewController {
+  override public func viewDidLoad() {
     super.viewDidLoad()
+    super.view.backgroundColor = Style.backgroundColor
 
     let label = UILabel()
     label.text = "Soon a quiz will be here"

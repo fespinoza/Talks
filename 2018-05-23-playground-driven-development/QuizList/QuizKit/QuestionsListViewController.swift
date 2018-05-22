@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class QuestionsListViewController: UIViewController {
+public class QuestionsListViewController: UIViewController {
   let dataStorage = DataStorage.example()
 
   lazy var tableView: UITableView = {
@@ -22,7 +22,7 @@ class QuestionsListViewController: UIViewController {
     return tableView
   }()
 
-  override func viewDidLoad() {
+  public override func viewDidLoad() {
     super.viewDidLoad()
 
     self.view.addSubview(tableView)
@@ -32,7 +32,7 @@ class QuestionsListViewController: UIViewController {
     }
   }
 
-  override func viewWillAppear(_ animated: Bool) {
+  public override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
     self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -41,11 +41,11 @@ class QuestionsListViewController: UIViewController {
 }
 
 extension QuestionsListViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return dataStorage.quizes.count
   }
 
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "quizCell", for: indexPath) as! QuizCell
     let quiz = dataStorage.quizes[indexPath.row]
 
