@@ -2,12 +2,8 @@ import UIKit
 import SnapKit
 import QuizKit
 
-class QuizViewController: UIViewController {
-  var dataStorage = DataStorage.example() {
-    didSet {
-      updateView()
-    }
-  }
+public class QuizViewController: UIViewController {
+  let dataStorage: DataStorage
   var currentQuestionIndex: Int = 0 {
     didSet {
       updateView()
@@ -35,7 +31,18 @@ class QuizViewController: UIViewController {
   let wrongAnswerButton = UIButton()
   let answerButtonStackView = UIStackView()
 
-  override func viewDidLoad() {
+  public init(dataStorage: DataStorage) {
+    self.dataStorage = dataStorage
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  public required init?(coder aDecoder: NSCoder) {
+    // TODO: implement this correctly
+    self.dataStorage = DataStorage.example()
+    super.init(coder: aDecoder)
+  }
+
+  public override func viewDidLoad() {
     with(view) {
       $0.backgroundColor = Style.backgroundColor
     }
@@ -48,7 +55,6 @@ class QuizViewController: UIViewController {
 
     let questionView = with(UIView()) {
       $0.backgroundColor = .white
-      $0.layer.cornerRadius = 30
       $0.addGestureRecognizer(
         UITapGestureRecognizer(target: self, action: #selector(self.showAnswer(_:)))
       )
@@ -57,14 +63,16 @@ class QuizViewController: UIViewController {
     with(questionLabel) {
       $0.textColor = .gray
       $0.text = "...?"
+      $0.font = .systemFont(ofSize: 22)
+      $0.textAlignment = .center
     }
-    with(questionLabel, configure: Style.questionLabelStyle)
 
     with(answerLabel) {
       $0.textColor = .black
       $0.text = "...!"
+      $0.font = .systemFont(ofSize: 22)
+      $0.textAlignment = .center
     }
-    with(answerLabel, configure: Style.questionLabelStyle)
 
     let questionStackView = with(UIStackView()) {
       $0.axis = .vertical
@@ -178,18 +186,12 @@ class QuizViewController: UIViewController {
     updateView()
   }
 
-  override func viewDidAppear(_ animated: Bool) {
+  public override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
     with(showAnswerButton, configure: Style.roundedButton)
     with(correctAnswerButton, configure: Style.roundedButton)
     with(wrongAnswerButton, configure: Style.roundedButton)
-
-
-    with(questionLabel, configure: Style.enableDynamicFont)
-    with(answerLabel, configure: Style.enableDynamicFont)
-    with(questionIndexLabel, configure: Style.enableDynamicFont)
-    with(showAnswerButton.titleLabel, configure: Style.enableDynamicFont)
   }
 
   @objc func close(_ sender: UIButton) {
@@ -233,7 +235,7 @@ class QuizViewController: UIViewController {
   }
 }
 
-let quizViewController = QuizViewController()
+let quizViewController = QuizViewController(dataStorage: DataStorage.example())
 
 import PlaygroundSupport
 
@@ -242,7 +244,5 @@ PlaygroundPage.current.liveView = PlaygroundHelpers.preview(
   forDeviceType: .iphone8,
   orientation: .portrait,
   additionalTraits: [
-//    UITraitCollection.init(layoutDirection: .rightToLeft),
-//    UITraitCollection.init(preferredContentSizeCategory: .accessibilityExtraExtraExtraLarge),
   ]
 )
