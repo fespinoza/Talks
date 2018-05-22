@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let questionsNavigationController = UINavigationController(rootViewController: questionListViewController)
     questionsNavigationController.tabBarItem = UITabBarItem(title: "Questions", image: #imageLiteral(resourceName: "list-icon"), tag: 0)
 
-    let quizViewController = QuizViewController()
+    let quizViewController = QuizIntroViewController()
     quizViewController.tabBarItem = UITabBarItem(title: "Quiz", image: #imageLiteral(resourceName: "question-icon"), tag: 1)
 
     let tabBarViewController = UITabBarController()

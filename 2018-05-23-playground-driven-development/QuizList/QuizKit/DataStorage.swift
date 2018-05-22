@@ -13,10 +13,10 @@ public struct Quiz {
   public let answer: String
 }
 
-class DataStorage {
-  var quizes: [Quiz] = []
+public class DataStorage {
+  public var quizes: [Quiz] = []
 
-  static func example() -> DataStorage {
+  public static func example() -> DataStorage {
     let dataStorage = DataStorage()
     dataStorage.quizes = [
       Quiz(question: "What's the capital of Chile?", answer: "Santiago"),
